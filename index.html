@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATL Deals — Discount Events, Food & Fun in Atlanta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080809;
+    --surface: #111114;
+    --surface2: #18181d;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0efe8;
+    --muted: #7a7a80;
+    --accent: #e8b64c;
+    --accent2: #e85d24;
+    --teal: #2dd4b0;
+    --glow: rgba(232,182,76,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(8,8,9,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--black) !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif !important;
+    letter-spacing: 0 !important;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(232,93,36,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(232,182,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, rgba(45,212,176,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,182,76,0.1);
+    border: 1px solid rgba(232,182,76,0.25);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    width: fit-content;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.5;transform:scale(0.7)}
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+
+  .hero h1 .line2 {
+    display: block;
+    color: var(--accent);
+    -webkit-text-stroke: 2px var(--accent);
+    color: transparent;
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 480px;
+    font-weight: 300;
+    line-height: 1.7;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 400; }
+
+  .hero-actions {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--black);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #f0c55c; transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--muted);
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--text); }
+
+  .hero-stats {
+    margin-top: 64px;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-stat-num span { color: var(--accent); }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 2px;
+  }
+
+  /* ─── CITY SKYLINE DECORATION ─── */
+  .skyline {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 280px;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  /* ─── SCROLL TICKER ─── */
+  .ticker {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ticker-item .dot {
+    width: 4px; height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .ticker-item .pct {
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 80px 40px; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+
+  /* ─── FILTER TABS ─── */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    margin-top: 32px;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  /* ─── DEALS GRID ─── */
+  .deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .deal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+    position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .deal-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-3px);
+  }
+
+  .deal-card.featured {
+    border-color: rgba(232,182,76,0.3);
+  }
+
+  .deal-card.featured::before {
+    content: 'FEATURED';
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .deal-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deal-img-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: var(--surface2);
+  }
+
+  .deal-body {
+    padding: 20px;
+  }
+
+  .deal-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .deal-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .deal-venue {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .deal-venue svg { opacity: 0.5; }
+
+  .deal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .deal-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .price-now {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  .price-was {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .deal-discount {
+    background: rgba(232,93,36,0.15);
+    border: 1px solid rgba(232,93,36,0.3);
+    color: var(--accent2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .deal-cta {
+    display: block;
+    margin-top: 14px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .deal-cta:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  .deal-expires {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .deal-expires span { color: var(--accent2); }
+
+  /* ─── EMAIL CAPTURE ─── */
+  .email-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .email-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(232,182,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .email-section .section-label { justify-content: center; }
+  .email-section .section-label::before { display: none; }
+
+  .email-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 16px auto 0;
+    font-weight: 300;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 36px auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .email-input {
+    flex: 1;
+    min-width: 240px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 14px 18px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: var(--muted); }
+  .email-input:focus { border-color: var(--accent); }
+
+  .email-submit {
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .email-submit:hover { background: #f0c55c; transform: translateY(-1px); }
+
+  .email-perks {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .email-perk {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .email-perk svg { color: var(--teal); }
+
+  .success-msg {
+    display: none;
+    color: var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    margin-top: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── CATEGORIES ─── */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .cat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .cat-card:hover {
+    border-color: var(--accent);
+    background: var(--surface2);
+    transform: translateY(-2px);
+  }
+
+  .cat-emoji { font-size: 32px; margin-bottom: 10px; display: block; }
+
+  .cat-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+  }
+
+  .cat-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 40px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .step {
+    background: var(--surface);
+    padding: 36px 28px;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: 12px; right: 16px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .step-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step h3 {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .step p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  footer .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  footer .logo span { color: var(--muted); }
+
+  footer p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  .footer-links { display: flex; gap: 24px; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── HIDDEN CARD ─── */
+  .deal-card[data-cat]:not([data-cat="all"]) { }
+  .deal-card.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ATL<span>DEALS</span></a>
+  <ul class="nav-links">
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#notify" class="nav-cta">Get Alerts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Atlanta skyline SVG silhouette -->
+  <svg class="skyline" viewBox="0 0 800 280" fill="currentColor" preserveAspectRatio="xMaxYMax meet">
+    <!-- Buildings silhouette -->
+    <rect x="0" y="180" width="800" height="100"/>
+    <rect x="30" y="140" width="40" height="140"/>
+    <rect x="80" y="100" width="30" height="180"/>
+    <rect x="120" y="120" width="50" height="160"/>
+    <rect x="180" y="80" width="35" height="200"/>
+    <rect x="225" y="50" width="45" height="230"/>
+    <rect x="280" y="90" width="25" height="190"/>
+    <polygon points="225,50 247,30 270,50"/>
+    <rect x="315" y="110" width="55" height="170"/>
+    <rect x="320" y="95" width="45" height="20"/>
+    <rect x="380" y="60" width="40" height="220"/>
+    <rect x="382" y="40" width="36" height="25"/>
+    <rect x="430" y="130" width="30" height="150"/>
+    <rect x="470" y="100" width="50" height="180"/>
+    <rect x="475" y="80" width="40" height="25"/>
+    <rect x="530" y="140" width="45" height="140"/>
+    <rect x="585" y="110" width="35" height="170"/>
+    <rect x="630" y="90" width="55" height="190"/>
+    <rect x="695" y="130" width="40" height="150"/>
+    <rect x="745" y="150" width="55" height="130"/>
+  </svg>
+
+  <div class="hero-tag">🔴 LIVE · Atlanta, Georgia</div>
+  <h1>
+    BEST DEALS<br>
+    <span class="line2">IN ATLANTA</span>
+  </h1>
+  <p class="hero-sub">
+    Discount tickets to every <strong>event, game, restaurant,</strong> and <strong>attraction</strong> in the ATL — updated daily, automatically.
+  </p>
+  <div class="hero-actions">
+    <a href="#deals" class="btn-primary">Browse Today's Deals →</a>
+    <a href="#notify" class="btn-ghost">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Get deal alerts
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">240<span>+</span></div>
+      <div class="hero-stat-label">DEALS THIS WEEK</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">Up to <span>70%</span></div>
+      <div class="hero-stat-label">AVG DISCOUNT</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">12<span>K</span></div>
+      <div class="hero-stat-label">SUBSCRIBERS</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <!-- Duplicated for seamless loop -->
+  </div>
+</div>
+
+<!-- DEALS SECTION -->
+<section id="deals">
+  <div class="section-label">TODAY'S PICKS</div>
+  <div class="section-title">HOT DEALS</div>
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">All Deals</button>
+    <button class="filter-btn" data-filter="sports">Sports</button>
+    <button class="filter-btn" data-filter="dining">Dining</button>
+    <button class="filter-btn" data-filter="concerts">Concerts</button>
+    <button class="filter-btn" data-filter="theater">Theater</button>
+    <button class="filter-btn" data-filter="tours">Tours & Activities</button>
+    <button class="filter-btn" data-filter="attractions">Attractions</button>
+  </div>
+
+  <div class="deals-grid" id="dealsGrid">
+    <!-- Deals injected by JS -->
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-label">EXPLORE BY TYPE</div>
+  <div class="section-title">BROWSE CATEGORIES</div>
+  <div class="categories-grid">
+    <a href="#deals" class="cat-card" onclick="filterDeals('sports')">
+      <span class="cat-emoji">🏈</span>
+      <span class="cat-name">Sports</span>
+      <span class="cat-count">38 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('dining')">
+      <span class="cat-emoji">🍽️</span>
+      <span class="cat-name">Dining</span>
+      <span class="cat-count">64 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('concerts')">
+      <span class="cat-emoji">🎵</span>
+      <span class="cat-name">Concerts</span>
+      <span class="cat-count">29 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('theater')">
+      <span class="cat-emoji">🎭</span>
+      <span class="cat-name">Theater</span>
+      <span class="cat-count">17 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('tours')">
+      <span class="cat-emoji">🚌</span>
+      <span class="cat-name">Tours</span>
+      <span class="cat-count">22 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('attractions')">
+      <span class="cat-emoji">🎡</span>
+      <span class="cat-name">Attractions</span>
+      <span class="cat-count">31 deals</span>
+    </a>
+    <a href="#deals" class="cat-card" onclick="filterDeals('nightlife')">
+      <span class="cat-emoji">🌙</span>
+      <span class="cat-name">Nightlife</span>
+      <span class="cat-count">15 deals</span>
+    </a>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="email-section" id="notify">
+  <div class="section-label">NEVER MISS A DEAL</div>
+  <div class="section-title">GET WEEKLY DEAL DROPS</div>
+  <p class="email-sub">
+    Join 12,000+ Atlantans getting the best discounts delivered every Tuesday morning.
+  </p>
+  <div class="email-form">
+    <input
+      type="email"
+      class="email-input"
+      id="emailInput"
+      placeholder="your@email.com"
+      autocomplete="email"
+    >
+    <button class="email-submit" onclick="handleSubscribe()">Get Deals Free →</button>
+  </div>
+  <div class="success-msg" id="successMsg">
+    ✓ You're in! Check your inbox for your first deal drop.
+  </div>
+  <div class="email-perks">
+    <div class="email-perk">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Free, always
+    </div>
+    <div class="email-perk">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Unsubscribe anytime
+    </div>
+    <div class="email-perk">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      No spam, ever
+    </div>
+    <div class="email-perk">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Atlanta-only deals
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-label">THE PROCESS</div>
+  <div class="section-title">HOW ATL DEALS WORKS</div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01</span>
+      <span class="step-icon">🔍</span>
+      <h3>We find the deals</h3>
+      <p>Our system scans 50+ partners — Eventbrite, Ticketmaster, Goldstar, restaurants, and more — every day for new discounts.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <span class="step-icon">✂️</span>
+      <h3>We curate the best</h3>
+      <p>Only real discounts make it through. We filter out the noise and rank deals by value, popularity, and how fast they're selling.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <span class="step-icon">📬</span>
+      <h3>You get notified</h3>
+      <p>Deals drop to your inbox every Tuesday. Sign up once and never miss a discount on your favorite Atlanta experiences.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <span class="step-icon">🎟️</span>
+      <h3>You click, you save</h3>
+      <p>Tap a deal and buy direct from the venue or partner. No membership, no hidden fees — just the discount, right now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="logo">ATL<span>DEALS</span></div>
+    <p style="margin-top:6px">Atlanta's #1 local deals aggregator</p>
+  </div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Advertise</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+  <p>© 2025 ATL Deals · Atlanta, GA</p>
+</footer>
+
+<script>
+  /* ─── DEAL DATA (replace with real affiliate API data) ─── */
+  const deals = [
+    {
+      id: 1, cat: 'sports', featured: true,
+      emoji: '🏀',
+      title: 'Atlanta Hawks vs. Miami Heat',
+      venue: 'State Farm Arena',
+      priceNow: 29, priceWas: 65,
+      discount: 55,
+      expires: '2 days',
+      affiliate: '#'
+    },
+    {
+      id: 2, cat: 'dining', featured: false,
+      emoji: '🍽️',
+      title: '3-Course Dinner for Two',
+      venue: 'Ponce City Market',
+      priceNow: 49, priceWas: 110,
+      discount: 55,
+      expires: '5 days',
+      affiliate: '#'
+    },
+    {
+      id: 3, cat: 'concerts', featured: true,
+      emoji: '🎸',
+      title: 'Live Music: The Cadillac Three',
+      venue: 'Tabernacle Atlanta',
+      priceNow: 22, priceWas: 45,
+      discount: 51,
+      expires: '3 days',
+      affiliate: '#'
+    },
+    {
+      id: 4, cat: 'tours', featured: false,
+      emoji: '🚁',
+      title: 'Atlanta City Helicopter Tour',
+      venue: 'DeKalb-Peachtree Airport',
+      priceNow: 89, priceWas: 160,
+      discount: 44,
+      expires: '7 days',
+      affiliate: '#'
+    },
+    {
+      id: 5, cat: 'attractions', featured: false,
+      emoji: '🐟',
+      title: 'Georgia Aquarium — Family 4-Pack',
+      venue: 'Downtown Atlanta',
+      priceNow: 79, priceWas: 140,
+      discount: 44,
+      expires: '10 days',
+      affiliate: '#'
+    },
+    {
+      id: 6, cat: 'theater', featured: false,
+      emoji: '🎭',
+      title: 'Hamilton — Orchestra Seats',
+      venue: 'Fox Theatre',
+      priceNow: 55, priceWas: 130,
+      discount: 58,
+      expires: '1 day',
+      affiliate: '#'
+    },
+    {
+      id: 7, cat: 'sports', featured: false,
+      emoji: '⚾',
+      title: 'Atlanta Braves vs. Dodgers',
+      venue: 'Truist Park',
+      priceNow: 18, priceWas: 42,
+      discount: 57,
+      expires: '4 days',
+      affiliate: '#'
+    },
+    {
+      id: 8, cat: 'dining', featured: false,
+      emoji: '🍣',
+      title: 'Omakase Sushi Experience',
+      venue: 'Buckhead, Atlanta',
+      priceNow: 65, priceWas: 150,
+      discount: 57,
+      expires: '3 days',
+      affiliate: '#'
+    },
+    {
+      id: 9, cat: 'attractions', featured: false,
+      emoji: '🎢',
+      title: 'Six Flags Over Georgia — Day Pass',
+      venue: 'Austell, GA',
+      priceNow: 35, priceWas: 80,
+      discount: 56,
+      expires: '30 days',
+      affiliate: '#'
+    },
+  ];
+
+  /* ─── RENDER DEALS ─── */
+  function renderDeals(filter) {
+    const grid = document.getElementById('dealsGrid');
+    const filtered = filter === 'all' ? deals : deals.filter(d => d.cat === filter);
+    grid.innerHTML = filtered.map((d, i) => `
+      <div class="deal-card${d.featured ? ' featured' : ''}" style="animation-delay:${i * 0.06}s">
+        <div class="deal-img-placeholder">${d.emoji}</div>
+        <div class="deal-body">
+          <div class="deal-cat">${d.cat.toUpperCase()}</div>
+          <div class="deal-title">${d.title}</div>
+          <div class="deal-venue">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${d.venue}
+          </div>
+          <div class="deal-footer">
+            <div class="deal-price">
+              <span class="price-now">$${d.priceNow}</span>
+              <span class="price-was">$${d.priceWas}</span>
+            </div>
+            <span class="deal-discount">-${d.discount}% OFF</span>
+          </div>
+          <a href="${d.affiliate}" class="deal-cta" target="_blank" rel="noopener">Claim This Deal →</a>
+          <div class="deal-expires">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Expires in <span>${d.expires}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* ─── FILTER LOGIC ─── */
+  function filterDeals(cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`.filter-btn[data-filter="${cat}"]`);
+    if (btn) btn.classList.add('active');
+    renderDeals(cat);
+    document.getElementById('deals').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('filterBar').addEventListener('click', e => {
+    if (!e.target.classList.contains('filter-btn')) return;
+    const f = e.target.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    renderDeals(f);
+  });
+
+  /* ─── TICKER ─── */
+  const tickerItems = [
+    { text: 'Hawks vs Heat tonight', pct: '55% off' },
+    { text: 'Fox Theatre — Hamilton', pct: '58% off' },
+    { text: 'Georgia Aquarium 4-Pack', pct: '44% off' },
+    { text: 'Braves vs Dodgers', pct: '57% off' },
+    { text: 'Atlanta helicopter tour', pct: '44% off' },
+    { text: 'Six Flags day pass', pct: '56% off' },
+    { text: 'Buckhead omakase dinner', pct: '57% off' },
+    { text: 'The Cadillac Three live', pct: '51% off' },
+    { text: 'Ponce City Market dinner', pct: '55% off' },
+  ];
+
+  const tickerEl = document.getElementById('ticker');
+  const tickerHTML = tickerItems.map(t =>
+    `<span class="ticker-item"><span class="dot"></span>${t.text} — <span class="pct">${t.pct}</span></span>`
+  ).join('');
+  tickerEl.innerHTML = tickerHTML + tickerHTML; // duplicate for seamless loop
+
+  /* ─── EMAIL SUBSCRIBE ─── */
+  function handleSubscribe() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailInput').style.borderColor = '#e85d24';
+      return;
+    }
+    document.getElementById('emailInput').style.borderColor = '';
+    document.querySelector('.email-form').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+
+    // TODO: POST to your email provider (Klaviyo, ConvertKit, Mailchimp, etc.)
+    // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
+    console.log('Subscribed:', email);
+  }
+
+  document.getElementById('emailInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleSubscribe();
+  });
+
+  /* ─── INIT ─── */
+  renderDeals('all');
+</script>
+</body>
+</html>
